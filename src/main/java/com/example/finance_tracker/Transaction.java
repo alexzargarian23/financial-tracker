@@ -1,6 +1,9 @@
 package com.example.finance_tracker;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,15 +29,20 @@ public class Transaction {
     private String description;
 
     @Column(nullable = false)
+    @NotBlank(message =" amount shouldnt be null")
+    @DecimalMin(value = "0,01", message = "Amount must be at least 0.01")
     private BigDecimal amount;  // Use Double for monetary values
 
     @Column(nullable = false)
+
     private LocalDateTime transactionDate;  // More modern than Date
 
     @Column(nullable = false, updatable = false)
+    @NotBlank(message = "Date shouldnt be blank")
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
+    @NotBlank(message = "Type shouldnt be blank")
     @Enumerated(EnumType.STRING)
     private transactionTypeEnum transactionType;
 
