@@ -48,6 +48,12 @@ return repository.save(transaction);
     }
 
 
+    public List<Transaction> getTransaction() {
+        return repository.findAll();
+    }
+
+
+
 
 
     }
